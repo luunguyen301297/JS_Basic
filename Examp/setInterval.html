@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="text" id="num" value="0"><br>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+  </div>
+
+  <script>
+    let getValue = () => {
+      let num = document.getElementById('num').value
+      num++
+      if (num == 100) {
+        num = 0
+      }
+      document.getElementById('num').value = num
+    }
+
+    document.getElementById('start').onclick = () => start()
+    start = () => {
+      setInterval(getValue, 1)
+    }
+
+    document.getElementById('stop').onclick = () => stop()
+    stop = () => {
+      clearInterval()
+      let score = document.getElementById('num').value
+      alert(`score: ${score}`)
+      document.getElementById('num').value = 0
+    }
+  </script>
+</body>
+</html>

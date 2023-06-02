@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculator</h2>
+
+    <div>
+      Num 1 <input id="num1" type="text">
+      <span id="num1-format" class="span-alert">NaN</span>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div>
+      Num 2 <input id="num2" type="text">
+      <span id="num2-format" class="span-alert">NaN</span>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div>
+      Operator
+      <select id="operator">
+        <option>+</option>
+        <option>-</option>
+        <option>x</option>
+        <option>:</option>
+      </select>
+    </div>
+
+    <div class="spacer"></div>
+
+    <button id="submit-button">Submit</button>
+
+    <div class="spacer"></div>
+
+    <div>
+      Result <input id="result" type="text">
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('submit-button').onclick = () => {clickButton()}
+
+    clickButton = () => {
+      let n1 = document.getElementById('num1').value
+      let n2 = document.getElementById('num2').value
+      let operator = document.getElementById('operator').value
+      let result = ""
+
+      if (operator == '+') {
+        result = parseInt(n1) + parseInt(n2)
+      }
+      else if (operator == '-') {
+        result = parseInt(n1) - parseInt(n2)
+      }
+      else if (operator == 'x') {
+        result = parseInt(n1) * parseInt(n2)
+      }
+      else {
+        if (n2 == 0) {
+          alert(`Can't div 0`)
+        } else {
+          result = parseInt(n1) / parseInt(n2)}
+      }
+      document.getElementById('result').value = result
+    }
+
+
+    document.getElementById('num1').oninput = () => {checkNumber()}
+    document.getElementById('num2').oninput = () => {checkNumber()}
+
+    checkNumber = () => {
+      let n1 = document.getElementById('num1')
+      let n2 = document.getElementById('num2')
+      let n1Format = document.getElementById('num1-format')
+      let n2Format = document.getElementById('num2-format')
+
+      if (isNaN(n1.value)) {
+        n1Format.style.display = "block"
+      } else {
+        n1Format.style.display = "none"
+      }
+
+      if (isNaN(n2.value)) {
+        n2Format.style.display = "block"
+      } else {
+        n2Format.style.display = "none"
+      }
+    }
+  </script>
+</body>
+
+<style>
+  .container {
+    text-align: center;
+  }
+  .spacer {
+    height: 10px;
+  }
+  button {
+    width: 90px;
+    height: 30px;
+  }
+  input {
+    outline: none;
+  }
+  .span-alert {
+    margin: auto;
+    width: 220px;
+    color: white;
+    background-color: rgb(255, 48, 48);
+    display: none;
+  }
+</style>
+</html>
