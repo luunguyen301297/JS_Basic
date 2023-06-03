@@ -73,8 +73,8 @@
     }
 
 
-    document.getElementById('num1').oninput = () => {checkNumber()}
-    document.getElementById('num2').oninput = () => {checkNumber()}
+    document.getElementById('num1').oninput = () => {checkNumber(this)}
+    document.getElementById('num2').oninput = () => {checkNumber(this)}
 
     checkNumber = () => {
       let n1 = document.getElementById('num1')
