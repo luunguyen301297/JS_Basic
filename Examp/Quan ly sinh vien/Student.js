@@ -10,12 +10,14 @@ addStudent = () => {
   let physics_score = document.getElementById('physics-score').value
   let chemystry_score = document.getElementById('chemystry-score').value
 
-  let gpa = (maths_score + physics_score + chemystry_score) / 3
+  let gpa = (parseInt(maths_score) + parseInt(physics_score) + parseInt(chemystry_score)) / 3
+  let ranked = ""
 
   let listStudent = {
     ID: student_id,
     Name: name,
-    GPA: gpa
+    GPA: gpa,
+    Ranked: ranked
   }
   data.push(listStudent)
   renderTable()
