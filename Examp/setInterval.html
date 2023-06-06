@@ -14,6 +14,7 @@
   </div>
 
   <script>
+    let Interval
     let getValue = () => {
       let num = document.getElementById('num').value
       num++
@@ -30,7 +31,7 @@
 
     document.getElementById('stop').onclick = () => stop()
     stop = () => {
-      clearInterval()
+      clearInterval(Interval)
       let score = document.getElementById('num').value
       alert(`score: ${score}`)
       document.getElementById('num').value = 0

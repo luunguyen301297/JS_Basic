@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <h2>Stopwatch</h2>
+  </div>
+  <div>
+    <p><span id="seconds">00</span> : <span id="tens">00</span></p>
+  </div>
+  <div>
+    <button id="button-start">Start</button>
+    <button id="button-stop">Stop</button>
+    <button id="button-reset">Reset</button>
+  </div>
+</body>
+
+<script>
+  window.onload = () => {
+    let appendTens = document.getElementById("tens")
+    let appendSeconds = document.getElementById("seconds")
+    let buttonStart = document.getElementById('button-start')
+    let buttonStop = document.getElementById('button-stop')
+    let buttonReset = document.getElementById('button-reset')
+
+    let seconds = 00
+    let tens = 00
+    let Interval
+
+    startTimer = () => {
+      tens++
+      if(tens <= 9){
+        appendTens.innerHTML = '0' + tens
+      }
+      if (tens > 9){
+      appendTens.innerHTML = tens
+      }
+
+      if (tens > 99) {
+        seconds++
+        appendSeconds.innerHTML = '0' + seconds
+        tens = 0
+        appendTens.innerHTML = '0' + 0
+      }
+
+      if (seconds > 9){
+        appendSeconds.innerHTML = seconds
+      }
+    }
+
+    buttonStart.onclick = () => {
+      clearInterval(Interval)
+      Interval = setInterval(startTimer, 10)
+    }
+
+    buttonStop.onclick = () => {
+      clearInterval(Interval)
+      buttonStart.innerHTML = 'Continues'
+    }
+
+    buttonReset.onclick = () => {
+      clearInterval(Interval)
+      tens = '00'
+      seconds = '00'
+      appendTens.innerHTML = tens
+      appendSeconds.innerHTML = seconds
+      buttonStart.innerHTML = 'Start'
+    }
+  }
+</script>
+
+<style>
+  body {
+    text-align: center;
+  }
+
+  span {
+    border: 1px solid;
+
+  }
+  button {
+    width: 75px;
+  }
+</style>
+</html>
