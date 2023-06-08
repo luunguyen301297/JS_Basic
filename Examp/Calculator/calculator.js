@@ -37,7 +37,7 @@ for (let i = 0; i < operator.length; i++) {
       input.innerHTML += e.target.innerHTML;
     };
   });
-};
+};+
 
 result.addEventListener("click", () => {
   let inputString = input.innerHTML;
