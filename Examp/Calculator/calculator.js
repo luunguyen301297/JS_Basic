@@ -12,7 +12,7 @@ for (let i = 0; i < number.length; i++) {
 
     if (resultDisplayed === false) {
       input.innerHTML += e.target.innerHTML;
-    } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
+    } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === ":") {
       resultDisplayed = false;
       input.innerHTML += e.target.innerHTML;
     } else {
@@ -28,7 +28,7 @@ for (let i = 0; i < operator.length; i++) {
     let currentString = input.innerHTML;
     let lastChar = currentString[currentString.length - 1];
 
-    if (lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
+    if (lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === ":") {
       let newString = currentString.substring(0, currentString.length - 1) + e.target.innerHTML;
       input.innerHTML = newString;
     } else if (currentString.length == 0) {
@@ -41,21 +41,14 @@ for (let i = 0; i < operator.length; i++) {
 
 result.addEventListener("click", () => {
   let inputString = input.innerHTML;
-  let numbers = inputString.split(/\+|\-|\×|\÷/g);
+  let numbers = inputString.split(/\+|\-|\x|\:/g);
   let operators = inputString.replace(/[0-9]|\./g, "").split("");
 
-  let divide = operators.indexOf("÷");
-  while (divide != -1) {
-    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
-    operators.splice(divide, 1);
-    divide = operators.indexOf("÷");
-  };
-
-  let multiply = operators.indexOf("×");
-  while (multiply != -1) {
-    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
-    operators.splice(multiply, 1);
-    multiply = operators.indexOf("×");
+  let add = operators.indexOf("+")
+  while (add != -1) {
+    numbers.splice(add, 2, parseFloat(number[add]) +parseFloat(numbers[add +1]));
+    operators.splice(add, 1);
+    add = operators.indexOf("+");
   };
 
   let subtract = operators.indexOf("-");
@@ -65,15 +58,21 @@ result.addEventListener("click", () => {
     subtract = operators.indexOf("-");
   };
 
-  let add = operators.indexOf("+");
-  while (add != -1) {
-    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
-    operators.splice(add, 1);
-    add = operators.indexOf("+");
+  let multiply = operators.indexOf("x");
+  while (multiply != -1) {
+    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
+    operators.splice(multiply, 1);
+    multiply = operators.indexOf("x");
+  };
+
+  let divide = operators.indexOf(":");
+  while (divide != -1) {
+    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
+    operators.splice(divide, 1);
+    divide = operators.indexOf(":");
   };
 
   input.innerHTML = numbers[0];
-
   resultDisplayed = true;
 });
 
